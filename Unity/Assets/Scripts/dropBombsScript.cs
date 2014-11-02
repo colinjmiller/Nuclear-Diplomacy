@@ -16,7 +16,7 @@ public class dropBombsScript : MonoBehaviour {
 		currentFrame++;
 		if (Mathf.Abs(transform.position.x - target.transform.position.x) < 7) {
 			canDrop = true;
-			Debug.Log("Can drop");
+			// Debug.Log("Can drop");
 		}
 
 		if (canDrop && (currentFrame - frameSinceBomb) > framesBetween && numBombsToDrop > 0) {

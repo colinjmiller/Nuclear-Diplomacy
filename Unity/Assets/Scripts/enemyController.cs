@@ -9,7 +9,7 @@ public class enemyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Time.frameCount % 200 == 0) {
-			Debug.Log("Spawning plane");
+			// Debug.Log("Spawning plane");
 			// GameObject plane = Instantiate (plane, planeSpawnRight.transform.position, Quaternion.identity) as GameObject;
 		}
 	}

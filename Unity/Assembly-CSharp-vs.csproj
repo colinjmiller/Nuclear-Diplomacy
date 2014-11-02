@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\enemyController.cs" />
      <Compile Include="Assets\Scripts\forceFieldScript.cs" />
      <Compile Include="Assets\Scripts\movement.cs" />
+     <Compile Include="Assets\Scripts\phaseControllerScript.cs" />
      <Compile Include="Assets\Scripts\towerScript.cs" />
      <Compile Include="Assets\Scripts\wallScript.cs" />
   </ItemGroup>
