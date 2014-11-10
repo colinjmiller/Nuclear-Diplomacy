@@ -6,11 +6,22 @@ public class enemyController : MonoBehaviour {
 	public GameObject plane;
 	public GameObject planeSpawnRight;
 
-	// Update is called once per frame
+	private phaseControllerScript phaseController;
+
+	void Start() {
+		phaseController = GameObject.Find ("phaseController").GetComponent<phaseControllerScript> ();
+	}
+
 	void Update () {
+		if (phaseController.canSpawn()) {
+			spawnEnemies();
+		}
+	}
+
+	void spawnEnemies() {
 		if (Time.frameCount % 200 == 0) {
 			// Debug.Log("Spawning plane");
-			// GameObject plane = Instantiate (plane, planeSpawnRight.transform.position, Quaternion.identity) as GameObject;
+			GameObject planeClone = (GameObject) Instantiate (plane, planeSpawnRight.transform.position, Quaternion.identity);
 		}
 	}
 }

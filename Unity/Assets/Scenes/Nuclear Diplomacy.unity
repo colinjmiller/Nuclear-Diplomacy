@@ -117,8 +117,9 @@ MonoBehaviour:
   transitionSpeed: 1
   text: {fileID: 1767049442}
   peaceInterval: 10
-  warInterval: 10
+  warInterval: 15
   warningInterval: 5
+  peaceObjects: {fileID: 1695741708}
 --- !u!1 &65698131
 GameObject:
   m_ObjectHideFlags: 0
@@ -1466,7 +1467,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1968140177}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.60000038, y: 5, z: 0}
+  m_LocalPosition: {x: 19.3863449, y: 7.99581909, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 73961934}

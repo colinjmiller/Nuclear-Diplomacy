@@ -9,6 +9,9 @@ public class phaseControllerScript : MonoBehaviour {
 	public float peaceInterval = 10;
 	public float warInterval = 10;
 	public float warningInterval = 5;
+
+	public GameObject peaceObjects;
+
 	private float newSize;
 	private float initSize;
 	private float newY;
@@ -16,6 +19,7 @@ public class phaseControllerScript : MonoBehaviour {
 
 	private float nextEvent;
 	private bool peace;
+	private bool transitioning;
 
 	void Start() {
 		initSize = Camera.main.orthographicSize;
@@ -24,6 +28,7 @@ public class phaseControllerScript : MonoBehaviour {
 		newY = initY;
 
 		peace = true;
+		transitioning = false;
 		nextEvent = Time.time + peaceInterval;
 	}
 
@@ -35,21 +40,35 @@ public class phaseControllerScript : MonoBehaviour {
 		phaseText ();
 		positionCamera ();
 	}
+
+	////////////////////////////////////
+	// Getters
+	////////////////////////////////////
+
+	public bool isPeace() {
+		return peace;
+	}
+
+	public bool canSpawn() {
+		return !peace && !transitioning;
+	}
+
+	////////////////////////////////////
+	// Private Helpers
+	////////////////////////////////////
 	
-	void switchPhase() {
+	private void switchPhase() {
 		newSize = (newSize == initSize) ? warSize : initSize;
 		newY = (newY == initY) ? (initY + (warSize - initSize)) : initY;
 		if (peace) {
-			warInterval *= 1; // TODO: 2
-			nextEvent += warInterval;
+			startWarPhase();
 		} else {
-			peaceInterval -= 0; // TODO: 10
-			nextEvent += peaceInterval;
+			startPeacePhase();
 		}
 		peace = !peace;
 	}
 
-	void positionCamera() {
+	private void positionCamera() {
 		Camera.main.orthographicSize = Mathf.Lerp (Camera.main.orthographicSize, newSize, Time.deltaTime * transitionSpeed);
 		Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, 
 		                                              new Vector3(0f, newY, Camera.main.transform.position.z), 
@@ -57,13 +76,38 @@ public class phaseControllerScript : MonoBehaviour {
 	}
 
 	// If the phase is close to ending, let the player know
-	void phaseText() {
+	private void phaseText() {
 		if (Time.time >= nextEvent - warningInterval) {
+			// Show text
+			transitioning = true;
 			text.guiText.color = new Color (1f, 1f, 1f, 1f);
 			text.transform.FindChild("foregroundText").guiText.color = new Color (1f, 0f, 0f, 1f);
 		} else {
+			// Hide text
+			transitioning = false;
 			text.guiText.color = new Color(1f, 1f, 1f, 0f);
 			text.transform.FindChild("foregroundText").guiText.color = new Color (1f, 0f, 0f, 0f);
+		}
+	}
+
+	private void startWarPhase() {
+		toggleVisibility (peaceObjects, false);
+		warInterval *= 1; // TODO: 2
+		nextEvent += warInterval;
+	}
+
+	private void startPeacePhase() {
+		toggleVisibility (peaceObjects, true);
+		peaceInterval -= 0; // TODO: 10
+		nextEvent += peaceInterval;
+	}
+
+	// Toggles the visibility of obj GameObject and its children base on isVisible
+	private void toggleVisibility(GameObject obj, bool isVisible) {
+		obj.renderer.enabled = isVisible;
+		Renderer[] renderers = obj.GetComponentsInChildren<Renderer> ();
+		foreach (Renderer r in renderers) {
+			r.enabled = isVisible;
 		}
 	}
 }
