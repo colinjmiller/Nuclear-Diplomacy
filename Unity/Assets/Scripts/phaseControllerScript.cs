@@ -18,6 +18,7 @@ public class phaseControllerScript : MonoBehaviour {
 	private float initY;
 
 	private float nextEvent;
+	private int currentWarPhase;
 	private bool peace;
 	private bool transitioning;
 
@@ -34,7 +35,7 @@ public class phaseControllerScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (Time.time >= nextEvent) {
+		if (Time.time >= nextEvent && GameObject.FindGameObjectsWithTag("Enemy").Length == 0) {
 			switchPhase();
 		}
 		phaseText ();
@@ -51,6 +52,10 @@ public class phaseControllerScript : MonoBehaviour {
 
 	public bool canSpawn() {
 		return !peace && !transitioning;
+	}
+
+	public int getWarPhase() {
+		return currentWarPhase;
 	}
 
 	////////////////////////////////////
@@ -91,6 +96,7 @@ public class phaseControllerScript : MonoBehaviour {
 	}
 
 	private void startWarPhase() {
+		currentWarPhase++;
 		toggleVisibility (peaceObjects, false);
 		warInterval *= 1; // TODO: 2
 		nextEvent += warInterval;

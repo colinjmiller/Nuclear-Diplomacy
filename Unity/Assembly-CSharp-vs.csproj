@@ -51,9 +51,13 @@
      <Compile Include="Assets\Scripts\MouseController.cs" />
      <Compile Include="Assets\Scripts\antiAircraftScript.cs" />
      <Compile Include="Assets\Scripts\buildItemScript.cs" />
+     <Compile Include="Assets\Scripts\buildingController.cs" />
+     <Compile Include="Assets\Scripts\createSmoke.cs" />
      <Compile Include="Assets\Scripts\destroyOutsideView.cs" />
+     <Compile Include="Assets\Scripts\destroySystem.cs" />
      <Compile Include="Assets\Scripts\dropBombsScript.cs" />
      <Compile Include="Assets\Scripts\enemyController.cs" />
+     <Compile Include="Assets\Scripts\enemyDamage.cs" />
      <Compile Include="Assets\Scripts\forceFieldScript.cs" />
      <Compile Include="Assets\Scripts\movement.cs" />
      <Compile Include="Assets\Scripts\phaseControllerScript.cs" />
